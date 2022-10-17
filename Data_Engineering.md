@@ -20,10 +20,12 @@ Repo: ftb07_SQL_Challenge
     * Repeatability: The entire process can be automated
         * Stored Procedures run the various scripts
         * A Database Analyst (DBA) can set the stored proceedures to run automatically (over night)  
+
 2. Create a Database
     * Right-Click Databases --> New Database
     * Parameter selection to be added later
     * ![SSMS New Database](images/ssms_New_Database.png)
+
 3. Import Data
     * Create a schemna called "stage". One time process.  
         * Database --> Security --> Right-Click Schemas --> New Schema
@@ -31,32 +33,63 @@ Repo: ftb07_SQL_Challenge
         * ![SSMS New Schema](images/ssms_New_Schema.png)
     * Import CSV files 
         * Right-Click Database --> Tasks --> Import Flat File
-        * ![1. Launch Wizzard](images/ssms_Import_Flat_File.png)
-        * ![2. Select CSV file](images/ssms_Import_Specify_Input_File.png)
-        * ![3. Preview Data](images/ssms_Import_Preview_Data.png)
-        * ![4. Configure Columns](images/ssms_Import_Modify_Columns.png)
-        * ![5. Verify Import Parameters ](images/ssms_Import_Summary.png)
-        * ![6. Import Result](images/ssms_Import_Results.png)
-3. Stored Proceedures: Create Tables 
-    * Contains data (csv) files imnported into the system
-4. Stored Proceedures: Insert Data from Imports
-    * Contains images used in the various readme files
+            1. Launch Wizzard
+            ![1. Launch Wizzard](images/ssms_Import_Flat_File.png)
+            2. Select CSV file
+            ![2. Select CSV file](images/ssms_Import_Specify_Input_File.png)
+            3. Preview Data
+            ![3. Preview Data](images/ssms_Import_Preview_Data.png)
+            4. Configure Columns
+            ![4. Configure Columns](images/ssms_Import_Modify_Columns.png)
+            5. Verify Import Parameters
+            ![5. Verify Import Parameters ](images/ssms_Import_Summary.png)
+            6. Import Result
+            ![6. Import Result](images/ssms_Import_Results.png)
+        * CSV Files Imported:
+            * [CSV File: Merchant_Category](data/merchant_category.csv)
+            * [CSV File: Cardholder.csv](data/card_holder.csv)
+            * [CSV File: Credit_Card.csv](data/credit_card.csv)
+            * [CSV File: Merchant.csv](data/merchant.csv)
+            * [CSV File: Transaction.csv](data/transaction.csv)
+    * Validation of Foreign Keys in Staged Data Tables
+        * [Validate Credit Card to Cardholder](code/stage.v_Validate_Credit_Card_TO_Card_Holder.View.sql)
+        * [Validate Merchant to Merchant Category](code/stage.v_Validate_Merchant_TO_Merchant_Category.View.sql)
+        * [Validate Transaction to Merchant to Credit Card](code/stage.v_Validate_Transaction_FK.View.sql)
+        
+4. Stored Proceedures: Create Tables 
+    * Create Tables:
+        * [Create Table: Cardholder](code/dbo.sp_Create_Table_Cardholder.StoredProcedure.sql)
+        * [Create Table: Credit_Card](code/dbo.sp_Create_Table_Credit_Card.StoredProcedure.sql)
+        * [Create Table: Merchant_Category](code/dbo.sp_Create_Table_Merchant_Category.StoredProcedure.sql)
+        * [Create Table: Merchant](code/dbo.sp_Create_Table_Merchant.StoredProcedure.sql)
+        * [Create Table: Transaction](code/dbo.sp_Create_Table_Transaction.StoredProcedure.sql)
+    * Deviation from Design
+        * Credit Card Table: Add Column - id identity(int) NOT NULL
+            * When populating the Credit Card Table, the id field will be populated automatically
+        * Transaction Table: Add Column - credit_card_id int NOT NULL
+
+5. Stored Proceedures: Insert Data from Imports
+    * Insert Static Data
+        * [Merchant_Category](code/dbo.sp_Insert_Static_Data_Merchant_Category.StoredProcedure.sql)
+    * Insert Master Data
+        * [Cardholder.csv](code/dbo.sp_Insert_Master_Data_Cardholder.StoredProcedure.sql)
+        * [Credit_Card.csv](code/dbo.sp_Insert_Master_Data_Credit_Card.StoredProcedure.sql)
+        * [Merchant.csv](code/dbo.sp_Insert_Master_Data_Merchant.StoredProcedure.sql) 
+    * Insert Transaction Data
+        * [Transaction.csv](code/tdbo.sp_Insert_Transaction_Data_Transaction.StoredProcedure.sql)
+    * Deviation from Design 
+        * [Add Credit Card ID to Transaction table](code/tdbo.sp_Insert_Transaction_Data_Transaction.StoredProcedure.sql)
+        * [Populate Credit Card ID in Transaction Table](code/tdbo.sp_Insert_Transaction_Data_Transaction.StoredProcedure.sql)
+
 5. Stored Proceedures: Alter Table - Add Foreign Key Constraints
-    * sdgdsfg
-6. Master Strored Proceedure: Runs all storeed proceedures
+    * [FK Credit Card to Cardholder](code/dbo.sp_Alter_Table_FK_Credit_Card.StoredProcedure.sql)
+    * [FK Merchant to Merchant Category](code/dbo.sp_Alter_Table_FK_Merchant.StoredProcedure.sql)
+    * [FK Transaction to Merchant to Credit Card](code/dbo.sp_Alter_Table_FK_Transaction.StoredProcedure.sql)
+        
+6. Master Strored Procedure: Runs all storeed proceedures
     * Internal documentation of the Data Engineering Plan
+    * [Master Stored Procedure](code/dbo.sp__Master_Create_Tables.StoredProcedure.sql)
 
-## ReadMe Documents
-1. Report
-    * Report 1 - Main Problem
-    * Report 2 - Challenge Problem
-2. Schema
-    * Quick DBD
-3. SQL 
-    * How to use SQL Server Management Studio
-    * Overview of this Credit Card Transactions database' design
+7. Final: Database Diagram/Schema
+    ![SSMS New Database](images/ssms_Database_Diagram2.png)
 
-## Code
-1. SQL - Data Organization
-2. Python - Data Visualization
-3. Python - Challenge
