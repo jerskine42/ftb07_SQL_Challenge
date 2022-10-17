@@ -29,21 +29,21 @@ Repo: ftb07_SQL_Challenge
 3. Import Data
     * Create a schemna called "stage". One time process.  
         * Database --> Security --> Right-Click Schemas --> New Schema
-        * Parameter selection to be added later
+        * Parameter selection to be added later  
         * ![SSMS New Schema](images/ssms_New_Schema.png)
     * Import CSV files 
         * Right-Click Database --> Tasks --> Import Flat File
-            1. Launch Wizzard
+            1. Launch Wizzard  
             ![1. Launch Wizzard](images/ssms_Import_Flat_File.png)
-            2. Select CSV file
+            2. Select CSV file  
             ![2. Select CSV file](images/ssms_Import_Specify_Input_File.png)
-            3. Preview Data
+            3. Preview Data  
             ![3. Preview Data](images/ssms_Import_Preview_Data.png)
-            4. Configure Columns
+            4. Configure Columns  
             ![4. Configure Columns](images/ssms_Import_Modify_Columns.png)
-            5. Verify Import Parameters
+            5. Verify Import Parameters  
             ![5. Verify Import Parameters ](images/ssms_Import_Summary.png)
-            6. Import Result
+            6. Import Result  
             ![6. Import Result](images/ssms_Import_Results.png)
         * CSV Files Imported:
             * [CSV File: Merchant_Category](data/merchant_category.csv)
@@ -52,12 +52,15 @@ Repo: ftb07_SQL_Challenge
             * [CSV File: Merchant.csv](data/merchant.csv)
             * [CSV File: Transaction.csv](data/transaction.csv)
     * Validation of Foreign Keys in Staged Data Tables
+        * Views that return records with unmatcked foreign keys 
+        * Desired result is that no records are returned
         * [Validate Credit Card to Cardholder](code/stage.v_Validate_Credit_Card_TO_Card_Holder.View.sql)
         * [Validate Merchant to Merchant Category](code/stage.v_Validate_Merchant_TO_Merchant_Category.View.sql)
         * [Validate Transaction to Merchant to Credit Card](code/stage.v_Validate_Transaction_FK.View.sql)
         
 4. Stored Proceedures: Create Tables 
     * Create Tables:
+        * Stored Proceedures to create tables in the database
         * [Create Table: Cardholder](code/dbo.sp_Create_Table_Cardholder.StoredProcedure.sql)
         * [Create Table: Credit_Card](code/dbo.sp_Create_Table_Credit_Card.StoredProcedure.sql)
         * [Create Table: Merchant_Category](code/dbo.sp_Create_Table_Merchant_Category.StoredProcedure.sql)
@@ -82,6 +85,7 @@ Repo: ftb07_SQL_Challenge
         * [Populate Credit Card ID in Transaction Table](code/tdbo.sp_Insert_Transaction_Data_Transaction.StoredProcedure.sql)
 
 5. Stored Proceedures: Alter Table - Add Foreign Key Constraints
+    * Create foreign key constraints 
     * [FK Credit Card to Cardholder](code/dbo.sp_Alter_Table_FK_Credit_Card.StoredProcedure.sql)
     * [FK Merchant to Merchant Category](code/dbo.sp_Alter_Table_FK_Merchant.StoredProcedure.sql)
     * [FK Transaction to Merchant to Credit Card](code/dbo.sp_Alter_Table_FK_Transaction.StoredProcedure.sql)
