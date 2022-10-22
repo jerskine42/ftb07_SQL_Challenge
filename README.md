@@ -18,15 +18,16 @@ The purpose of this assignement is to  :
 4. Images
     * Contains images used in the various readme files
 
-## ReadMe Documents
+## Markdown Documents
 1. [Data Modeling](Data_Modeling.md) 
     * Quick DBD
-2. SQL 
+2. [Data Engineering](Data_Engineering.md)  
     * How to use SQL Server Management Studio
     * Overview of this Credit Card Transactions database' design
-3. Report
-    * Report 1 - Main Problem
-    * Report 2 - Challenge Problem
+3. Data Analysis 
+    * [Part_1](Data_Analysis_Part1.md) - Querying to identify fraudulent transations with SQL
+    * [Part_2](Data_Analysis_Part2.md) - Visualizing trends to identify fraudulent transations with Python
+    * [Challenge](Data_Analysis_Challenge.md) - Identifying fraudulent transactions by look for outliers with Python
     
 ## Code
 1. SQL - Data Organization
