@@ -12,9 +12,9 @@ Repo: ftb07_SQL_Challenge
   
 ## Overview 
 The csv data files provide indicat that we are analyzing credit card transactions 
-from an OOn-Line Transaction Processing (OLTP) System
+from an On-Line Transaction Processing (OLTP) System
   
-## Components of an On-Line Transaction Processing (OLTP) Data Structure 
+## Components of an OLTP Data Structure 
 1. Static/Meta Data
     * Short lists that rarely change. Attributues used by other data components.  
     * [CSV File: Merchant_Category](data/merchant_category.csv)
@@ -30,6 +30,7 @@ from an OOn-Line Transaction Processing (OLTP) System
     * Detail Table: List of items purchased, quatities, and prices
 4. Transactions
     * Exicution of a Document 
+    * the Transcation file provided is actually a "Transaction Summary" table
     * [CSV File: Transaction.csv](transaction.csv)
 
 ## Table Design
