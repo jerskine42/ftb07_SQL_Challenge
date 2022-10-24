@@ -19,15 +19,15 @@ The CFO of your firm has requested a report to help analyze potential fraudulent
 
 ### Preparing for Data Analysis
 * Create a View that provides the complete dataset  
-    * The purpose of this view is to transform the data to support the analysis at hand
-      * Identify Transaction Under $2
-      * Identify Special Timeframes (like 7am to 9am)
-      * Itentify Even Value Transactions
-      * Identify Transactions over $1000
+    * The purpose of this view is to transform the data to support the analysis at hand  
+      * Identify Transaction Under $2  
+      * Identify Special Timeframes (like 7am to 9am)  
+      * Itentify Even Value Transactions  
+      * Identify Transactions over $1000  
     * Sample Data  
-      ![Master View Sample](images/ssms_Master_View_Sample.png)
+      ![Master View Sample](images/ssms_Master_View_Sample.png)  
     * SQL View  
-      * [Master View Credit Card Transactions](code/dbo.v__CreditCard_Transactions_FullDataset.View.sql)
+      * [Master View Credit Card Transactions](code/dbo.v__CreditCard_Transactions_FullDataset.View.sql)  
     
 ### Part 1: Analysis in SQL  
 * Create a View that shows credit cards with a large number of small value transactions (Undrer $2)  
@@ -63,6 +63,7 @@ The CFO of your firm has requested a report to help analyze potential fraudulent
     * SQL Views  
       * [Top 5 Merchants](code/dbo.v_CreditCard_Transactions_Under_$2_Merchant.View.sql)  
     
+    
 ### Part 2: Overview   
 Your CFO has also requested detailed trends data on specific card holders. Use the [starter notebook](code/challenge.ipynb) to query your database and generate visualizations that supply the requested information as follows, then add your visualizations and observations to your markdown report:  
 * The two most important customers of the firm may have been hacked. Verify if there are any fraudulent transactions in their history. For privacy reasons, you only know that their cardholder IDs are 2 and 18.  
@@ -73,26 +74,27 @@ Your CFO has also requested detailed trends data on specific card holders. Use t
   * Using hvPlot, create a box plot, representing the expenditure data from January 2018 to June 2018 for cardholder ID 25.    
   * Are there any outliers for cardholder ID 25? How many outliers are there per month?  
   * Do you notice any anomalies? Describe your observations and conclusions.  
-  
+   
+   
 ### Part 2: Analysis in Python  
 * Connect to the Mater View in SQL Server  
-    * Identifying SQL Server Name 
-      ![SQL Server Connection Properties](images/SQL_Server_Connection_Properties.png)
-    * Python Notbook
-      ![Visual Data Analysis](code/visual_data_analysis.ipynb)
-
+    * Identifying SQL Server Name  
+      ![SQL Server Connection Properties](images/SQL_Server_Connection_Properties.png)  
+    * Python Notbook  
+      ![Visual Data Analysis](code/visual_data_analysis.ipynb)  
+  
 * Verify if there are any fraudulent transactions in customers 2 and 18 history.  
     * Customer 2 Transactions  
-      * Random amounts between $1 and $20
+      * Random amounts between $1 and $20  
         ![Transactions 2](images/hvplot_Customer2_Transactions.png)  
     * Customer 18 Transaction  
-      * Mostly random amounts between $1 and $100
-      * A number(8) of higher values transactions from $500 to $2000
+      * Mostly random amounts between $1 and $100  
+      * A number(8) of higher values transactions from $500 to $2000  
         ![Transactions 18](images/hvplot_Customer18_Transactions.png)  
     * Customer 2 and 18 Transactions  
-      * Similar patters except for customer 18's higher values
-      * Fraudulent transactions for both may be under $2, whic customer 18 has several large value transactions 
-        ![Transactions 2 and 18](images/hvplot_Customer2_Transactions.png)  
+      * Similar patters except for customer 18's higher values  
+      * Fraudulent transactions for both may be under $2, whic customer 18 has several large value transactions  
+        ![Transactions 2 and 18](images/hvplot_Customer2_18_Transactions.png)  
 
 * Verify if there are any fraudulent transactions in customers 25 .  
     * Card ***2279 Transaction - No fraud detected  
@@ -115,15 +117,15 @@ For help with outliers detection, read the following articles:
 * [Removing Outliers Using Standard Deviation in Python](https://www.kdnuggets.com/2017/02/removing-outliers-standard-deviation-python.html)
 * [How to Use Statistics to Identify Outliers in Data](https://machinelearningmastery.com/how-to-use-statistics-to-identify-outliers-in-data/)
 
-
-### Challenge: Python Functions
-* Jupyter Notebook [Challenge Functions](code/challenge.ipynb)
-  * Import SQL Dataset
-  * Create a function that uses standard deviation to identify anomalies for any cardholder
-    * Outliers lie outside the range Mean +/- 2.5 x Standard Deviations
-    * Test Function on 3 Random Customers
+  
+### Challenge: Python Functions  
+* Jupyter Notebook [Challenge Functions](code/challenge.ipynb)  
+  * Import SQL Dataset  
+  * Create a function that uses standard deviation to identify anomalies for any cardholder  
+    * Outliers lie outside the range Mean +/- 2.5 x Standard Deviations  
+    * Test Function on 3 Random Customers  
       ![Transactions 2 and 18](images/Challenge_Outliers_StdDev.png)  
-  * Create a function that uses interquartile range to identify anomalies for any cardholder.
-    * Outliers lie outside the range Mean +/- 1.5 x Inter-Quartile Range (75% less 25%)
-    * Test Function on 3 Random Customers
+  * Create a function that uses interquartile range to identify anomalies for any cardholder.  
+    * Outliers lie outside the range Mean +/- 1.5 x Inter-Quartile Range (75% less 25%)  
+    * Test Function on 3 Random Customers  
       ![Transactions 2 and 18](images/Challenge_Outliers_IQR.png)  
