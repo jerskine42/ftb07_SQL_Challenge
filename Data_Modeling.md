@@ -11,8 +11,7 @@ Repo: ftb07_SQL_Challenge
     * For the `transaction` table, the `date` column should be a TIMESTAMP datatype rather than DATE.
   
 ## Overview 
-The csv data files provide indicat that we are analyzing credit card transactions 
-from an On-Line Transaction Processing (OLTP) System
+The csv data files provide indicat that we are analyzing credit card transactions from an On-Line Transaction Processing (OLTP) System. 
   
 ## Components of an OLTP Data Structure 
 1. Static/Meta Data
@@ -20,17 +19,17 @@ from an On-Line Transaction Processing (OLTP) System
     * [CSV File: Merchant_Category](data/merchant_category.csv)
 2. Master Data 
     * Primary objects within the system
-    * [CSV File: Cardholder.csv](data/card_holder.csv)
-    * [CSV File: Credit_Card.csv](data/credit_card.csv)
-    * [CSV File: Merchant.csv](data/merchant.csv)
+    * [CSV File: Cardholder.csv](data/card_holder.csv) represents a person who my have one or many credit cards
+    * [CSV File: Credit_Card.csv](data/credit_card.csv) represtnts a object used to purchace items or make transactions
+    * [CSV File: Merchant.csv](data/merchant.csv) represents a vendor providing items for purchase and accepting payment
 3. Documents (Not Provided)
-    * Staging of a transaction
-    * Combination of Static and Master Data whit transaction specific parameters
-    * Header Table: Credit Card, Merchant and sales totals
-    * Detail Table: List of items purchased, quatities, and prices
+    * Staging of a transaction transactional data 
+    * Combination of Static and Master Data with transaction specific parameters
+    * Header Table: Credit Card, Merchant and Sales Totals
+    * Detail Table: List of Items purchased, Quatities, and Prices
 4. Transactions
-    * Exicution of a Document 
-    * the Transcation file provided is actually a "Transaction Summary" table
+    * Exicution of a Document based on the parameters recorded
+    * The Transcation file provided is actually a "Transaction Summary" file because it supplies only header information
     * [CSV File: Transaction.csv](transaction.csv)
 
 ## Table Design
@@ -41,16 +40,22 @@ from an On-Line Transaction Processing (OLTP) System
 2. Rule 2 - Additional Fields as required:
     * fk(s) = Foreign Key to other tables - naming convention = Table_Name_id
     * Other fields as required - consider nomalization rules
-3. Tables Provided
+3. Normalization
+    * Normailzation is an OLTP database design approach that drives efficency in data processing
+    * [Wikipedia Database Normalization](https://en.wikipedia.org/wiki/Database_normalization)
+    * Credit Card is a mapping table that reduces redundency: 
+        * Duplication of Cardholder data in the credit card table for Cardholders that have multiple Credit Cards is eliminated
+        * Transforms the many-to-many relationship (Cardholder/Transaction) to two one-to-many relationships (Cardholde/Credit Card and Credit/Transaction) 
+4. Tables Provided
     * Table Design Rules were followed for:
         * Cardholder, Merchant and Merchant_Category, and Transaction*
     * Table Design Rules were broken for:
         * Credit_Card: The id field is missing, the card field is considered to be a "code" field.  
         * Transaction*: Inherited the credit card non-conformance 
         * This can be corrected via the Extract Transform and Load (ETL) process in Data Engineering
-4. Hints
-    * The card field is a "code" field and can be converted to text varchar(20)
-    * The timestamp data type is consided a unique identifier and is not compatible with datetime data types
+5. Hints
+    * Valid: The card field is a "code" field and can be converted to text varchar(20), it might be possible for a credit card to contain alpha characters in the future
+    * Invalid: The timestamp data type is consided a unique identifier and is not compatible with datetime data types
 
 
 ## Entity Relationship Diagram (ERD)

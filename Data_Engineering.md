@@ -46,54 +46,53 @@ Repo: ftb07_SQL_Challenge
             6. Import Result  
             ![6. Import Result](images/ssms_Import_Results.png)
         * CSV Files Imported:
-            * [CSV File: Merchant_Category](data/merchant_category.csv)
+            * [CSV File: Merchant_Category.csv](data/merchant_category.csv)
             * [CSV File: Cardholder.csv](data/card_holder.csv)
             * [CSV File: Credit_Card.csv](data/credit_card.csv)
             * [CSV File: Merchant.csv](data/merchant.csv)
             * [CSV File: Transaction.csv](data/transaction.csv)
-    * Validation of Foreign Keys in Staged Data Tables
-        * Views that return records with unmatcked foreign keys 
-        * Desired result is that no records are returned
-        * [Validate Credit Card to Cardholder](code/stage.v_Validate_Credit_Card_TO_Card_Holder.View.sql)
-        * [Validate Merchant to Merchant Category](code/stage.v_Validate_Merchant_TO_Merchant_Category.View.sql)
-        * [Validate Transaction to Merchant to Credit Card](code/stage.v_Validate_Transaction_FK.View.sql)
+    * Validation of Foreign Keys in Staged Data Tables  
+        * Views that return records with unmatcked foreign keys  
+        * Desired result is that no records are returned in these views:  
+        * [Validate Credit Card to Cardholder](code/stage.v_Validate_Credit_Card_TO_Card_Holder.View.sql)  
+        * [Validate Merchant to Merchant Category](code/stage.v_Validate_Merchant_TO_Merchant_Category.View.sql)  
+        * [Validate Transaction to Merchant to Credit Card](code/stage.v_Validate_Transaction_FK.View.sql)  
         
-4. Stored Proceedures: Create Tables 
-    * Create Tables:
-        * Stored Proceedures to create tables in the database
-        * [Create Table: Cardholder](code/dbo.sp_Create_Table_Cardholder.StoredProcedure.sql)
-        * [Create Table: Credit_Card](code/dbo.sp_Create_Table_Credit_Card.StoredProcedure.sql)
-        * [Create Table: Merchant_Category](code/dbo.sp_Create_Table_Merchant_Category.StoredProcedure.sql)
-        * [Create Table: Merchant](code/dbo.sp_Create_Table_Merchant.StoredProcedure.sql)
-        * [Create Table: Transaction](code/dbo.sp_Create_Table_Transaction.StoredProcedure.sql)
-    * Deviation from Design
-        * Credit Card Table: Add Column - id identity(int) NOT NULL
-            * When populating the Credit Card Table, the id field will be populated automatically
-        * Transaction Table: Add Column - credit_card_id int NOT NULL
+4. Stored Proceedures: Create Tables  
+    * Create Tables:  
+        * Stored Proceedures to create tables in the database  
+        * [Create Table: Cardholder](code/dbo.sp_Create_Table_Cardholder.StoredProcedure.sql)  
+        * [Create Table: Credit_Card](code/dbo.sp_Create_Table_Credit_Card.StoredProcedure.sql)  
+            * Deviation from Design: Added id field to replace the card field as the primary key  
+            * id field is an Identity Int is automaitically populated/created when new records are added  
+        * [Create Table: Merchant_Category](code/dbo.sp_Create_Table_Merchant_Category.StoredProcedure.sql)  
+        * [Create Table: Merchant](code/dbo.sp_Create_Table_Merchant.StoredProcedure.sql)  
+        * [Create Table: Transaction](code/dbo.sp_Create_Table_Transaction.StoredProcedure.sql)  
+            * Deviation from Design: Added credit_card_id field to replace card as the foreign key to the credit card table  
+    
+5. Stored Proceedures: Insert Data from Imports  
+    * Insert Static Data  
+        * [Insert Into: Merchant_Category](code/dbo.sp_Insert_Static_Data_Merchant_Category.StoredProcedure.sql)  
+    * Insert Master Data  
+        * [Insert Into: Cardholder](code/dbo.sp_Insert_Master_Data_Cardholder.StoredProcedure.sql)  
+        * [Insert Into: Credit_Card](code/dbo.sp_Insert_Master_Data_Credit_Card.StoredProcedure.sql)  
+        * [Insert Into: Merchant](code/dbo.sp_Insert_Master_Data_Merchant.StoredProcedure.sql)   
+    * Insert Transaction Data  
+        * [Insert Into: Transaction](code/tdbo.sp_Insert_Transaction_Data_Transaction.StoredProcedure.sql)  
+    * Update Transaction Table with Credit Card ID (Replacing Card as the FK)   
+        * [Update Table: Populate Credit Card ID in Transaction Table](code/dbo.sp_Update_Transaction_Data_Credit_Card_ID.StoredProcedure.sql)  
+        * [Alter Table: Remove Card field from the Transaction table](code/dbo.sp_Alter_Table_DC_Transaction_Card.StoredProcedure.sql)  
 
-5. Stored Proceedures: Insert Data from Imports
-    * Insert Static Data
-        * [Merchant_Category](code/dbo.sp_Insert_Static_Data_Merchant_Category.StoredProcedure.sql)
-    * Insert Master Data
-        * [Cardholder.csv](code/dbo.sp_Insert_Master_Data_Cardholder.StoredProcedure.sql)
-        * [Credit_Card.csv](code/dbo.sp_Insert_Master_Data_Credit_Card.StoredProcedure.sql)
-        * [Merchant.csv](code/dbo.sp_Insert_Master_Data_Merchant.StoredProcedure.sql) 
-    * Insert Transaction Data
-        * [Transaction.csv](code/tdbo.sp_Insert_Transaction_Data_Transaction.StoredProcedure.sql)
-    * Deviation from Design 
-        * [Add Credit Card ID to Transaction table](code/tdbo.sp_Insert_Transaction_Data_Transaction.StoredProcedure.sql)
-        * [Populate Credit Card ID in Transaction Table](code/tdbo.sp_Insert_Transaction_Data_Transaction.StoredProcedure.sql)
-
-5. Stored Proceedures: Alter Table - Add Foreign Key Constraints
-    * Create foreign key constraints 
-    * [FK Credit Card to Cardholder](code/dbo.sp_Alter_Table_FK_Credit_Card.StoredProcedure.sql)
-    * [FK Merchant to Merchant Category](code/dbo.sp_Alter_Table_FK_Merchant.StoredProcedure.sql)
-    * [FK Transaction to Merchant to Credit Card](code/dbo.sp_Alter_Table_FK_Transaction.StoredProcedure.sql)
+5. Stored Proceedures: Alter Table - Add Foreign Key Constraints  
+    * Create foreign key constraints  
+    * [FK Credit Card to Cardholder](code/dbo.sp_Alter_Table_FK_Credit_Card.StoredProcedure.sql)  
+    * [FK Merchant to Merchant Category](code/dbo.sp_Alter_Table_FK_Merchant.StoredProcedure.sql)  
+    * [FK Transaction to Merchant to Credit Card](code/dbo.sp_Alter_Table_FK_Transaction.StoredProcedure.sql)  
         
-6. Master Strored Procedure: Runs all storeed proceedures
-    * Internal documentation of the Data Engineering Plan
-    * [Master Stored Procedure](code/dbo.sp__Master_Create_Tables.StoredProcedure.sql)
+6. Master Strored Procedure: Runs all stored proceedures  
+    * Internal documentation of the Data Engineering Plan  
+    * [Master Stored Procedure](code/dbo.sp__Master_Create_Tables.StoredProcedure.sql)  
 
-7. Final: Database Diagram/Schema
-    ![SSMS New Database](images/ssms_Database_Diagram2.png)
+7. Final: Database Diagram/Schema  
+    ![SSMS New Database](images/ssms_Database_Diagram2.png)  
 
