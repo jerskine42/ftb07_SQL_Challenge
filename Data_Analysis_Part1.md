@@ -22,9 +22,9 @@ The CFO of your firm has requested a report to help analyze potential fraudulent
       * Identify Transaction Under $2
       * Identify Special Timeframes (like 7am to 9am)
     * Sample Data
-      ![Master View](images/ssms_Master_View_Sample.png)
+      ![Master View Sample](images/ssms_Master_View_Sample.png)
     * SQL View  
-      * [Master View](code/dbo.v__CreditCard_Transactions_FullDataset.View.sql)
+      * [Master View Credit Card Transactions](code/dbo.v__CreditCard_Transactions_FullDataset.View.sql)
     
 #### Part 1: Analysis in SQL  
 * Create a View that shows credit cards with a large number of small value transactions (Undrer $2)  
@@ -33,7 +33,7 @@ The CFO of your firm has requested a report to help analyze potential fraudulent
       * A high percentage of small value transactions vs. a low number of transations (less than the mean)
       * Consider values that are 1 (Green) or 2 (Yellow) standard deviations from the mean
     * Credit cards marked in Red are candidates for further analysis  
-      ![Transactions Under $2](Analysis_Transactions_Under_2.png)  
+      ![Transactions Under $2](images/Analysis_Transactions_Under_2.png)  
     * SQL Views  
       * [Transactions Under $2](code/dbo.v_CreditCard_Transactions_Under_$2.View.sql)  
 
@@ -42,10 +42,10 @@ The CFO of your firm has requested a report to help analyze potential fraudulent
       * There are 9 transactions > $100) between 7am and 9am that apear suspicious
       * Suspicion 1 is that they are even dollar transactions (no pennies)   
         * There are the same percent of even dollar transactions in both time periods
-        ![Even Value Transactions](Analysis_Transactions_Top100_7to9.png)   
+        ![Even Value Transactions](images/Analysis_Transactions_Top100_7to9.png)   
       * Suspicion 2 are the transactions Over $1000 
         * There is a higher percent of transactions in the 7am to 9am time frame    
-        ![Transactions > $1000](Analysis_Transactions_Top100_7to9.png) 
+        ![Transactions > $1000](images/Analysis_Transactions_Top100_7to9.png) 
     * SQL Views
       * [Top 100 Transactions 7am to 9am](code/dbo.v_CreditCard_Transactions_Between_7am_9am_Top100.View.sql)  
       * [Even Value Transactions 7am to 9am](code/dbo.v_CreditCard_Transactions_Between_7am_9am_Even.View.sql)  
@@ -55,7 +55,7 @@ The CFO of your firm has requested a report to help analyze potential fraudulent
   
 * Create a view that shows merchats with with a large number of small value transactions  
     * There are 15 merchants with 5-7 transactions below $2  
-      ![Merchants](Analysis_Transactions_Under_2_Merchant.png)  
+      ![Merchants](images/Analysis_Transactions_Under_2_Merchant.png)  
     * SQL Views
       * [Top 5 Merchants](code/dbo.v_CreditCard_Transactions_Under_$2_Merchant.View.sql)  
     
