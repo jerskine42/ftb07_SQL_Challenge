@@ -24,33 +24,20 @@ Repo: ftb07_SQL_Challenge
 2. Create a Database
     * Right-Click Databases --> New Database
     * Parameter selection to be added later
-    * ![SSMS New Database](images/ssms_New_Database.png)
+        ![SSMS New Database](images/ssms_New_Database.png)
 
 3. Import Data
     * Create a schemna called "stage". One time process.  
         * Database --> Security --> Right-Click Schemas --> New Schema
         * Parameter selection to be added later  
-        * ![SSMS New Schema](images/ssms_New_Schema.png)
+            ![SSMS New Schema](images/ssms_New_Schema.png)
     * Import CSV files 
-        * Right-Click Database --> Tasks --> Import Flat File
-            1. Launch Wizzard  
-            ![1. Launch Wizzard](images/ssms_Import_Flat_File.png)
-            2. Select CSV file  
-            ![2. Select CSV file](images/ssms_Import_Specify_Input_File.png)
-            3. Preview Data  
-            ![3. Preview Data](images/ssms_Import_Preview_Data.png)
-            4. Configure Columns  
-            ![4. Configure Columns](images/ssms_Import_Modify_Columns.png)
-            5. Verify Import Parameters  
-            ![5. Verify Import Parameters ](images/ssms_Import_Summary.png)
-            6. Import Result  
-            ![6. Import Result](images/ssms_Import_Results.png)
         * CSV Files Imported:
-            * [CSV File: Merchant_Category.csv](data/merchant_category.csv)
-            * [CSV File: Cardholder.csv](data/card_holder.csv)
-            * [CSV File: Credit_Card.csv](data/credit_card.csv)
-            * [CSV File: Merchant.csv](data/merchant.csv)
-            * [CSV File: Transaction.csv](data/transaction.csv)
+            * [Merchant_Category.csv](data/merchant_category.csv)
+            * [Cardholder.csv](data/card_holder.csv)
+            * [Credit_Card.csv](data/credit_card.csv)
+            * [Merchant.csv](data/merchant.csv)
+            * [Transaction.csv](data/transaction.csv)
     * Validation of Foreign Keys in Staged Data Tables  
         * Views that return records with unmatcked foreign keys  
         * Desired result is that no records are returned in these views:  
@@ -92,6 +79,7 @@ Repo: ftb07_SQL_Challenge
 6. Master Strored Procedure: Runs all stored proceedures  
     * Internal documentation of the Data Engineering Plan  
     * [Master Stored Procedure](code/dbo.sp__Master_Create_Tables.StoredProcedure.sql)  
+        ![SSMS SP Result](images/ssms_Master_Stored_Proceedure_Run.png)
 
 7. Final: Database Diagram/Schema  
     ![SSMS New Database](images/ssms_Database_Diagram2.png)  
